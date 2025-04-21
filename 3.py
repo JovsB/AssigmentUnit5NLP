@@ -2,7 +2,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 
-# Your 5 short documents
+# same 5 documents
 documents = [
     "Words have meaning based on their use and context. Synonymy and antonymy show relations.",
     "Vector semantics represents word meaning in space. Similar words appear in similar contexts.",
@@ -22,14 +22,14 @@ cos_sim = cosine_similarity(tfidf_matrix)
 print("Cosine Similarity Matrix:")
 print(np.round(cos_sim, 2))
 
-# Find most similar pair (excluding self-comparison)
-max_val = 0
-pair = (0, 0)
+max_val = -1 # to be safe incase no pair
+pair = None
 
 for i in range(len(documents)):
-    for j in range(i + 1, len(documents)):
+    for j in range(i + 1, len(documents)):   # Avoid duplicate 
         if cos_sim[i][j] > max_val:
             max_val = cos_sim[i][j]
             pair = (i, j)
 
-print(f"\nMost similar documents: Document {pair[0]} and Document {pair[1]} (cosine similarity = {round(max_val, 2)})")
+if pair:
+    print(f"\nMost similar documents: Document {pair[0]} and Document {pair[1]} (cosine similarity = {round(max_val, 2)})")

@@ -10,11 +10,10 @@ documents = [
     "Cosine similarity helps compare vectors and find similar words or documents."
 ]
 
-# Create term-document matrix using raw frequency
+# Create matrix using raw frequency
 vectorizer = CountVectorizer()
 X = vectorizer.fit_transform(documents)
 df = pd.DataFrame(X.toarray(), columns=vectorizer.get_feature_names_out())
 
-# Print matrix
 print("Raw Frequency Term-Document Matrix:")
 print(df)
